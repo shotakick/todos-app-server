@@ -1,0 +1,42 @@
+#-------------------------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+#-------------------------------------------------------------------------------------------------------------
+
+version: '3'
+services:
+  api-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - $API_PORT:$API_PORT
+    volumes:
+      - ..:/workspace
+      # This lets you avoid setting up Git again in the container
+      - ~/.gitconfig:/root/.gitconfig
+      # Forwards the local Docker socket to the container.
+      - /var/run/docker.sock:/var/run/docker.sock
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    depends_on:
+      - mongo
+      - redis
+    links:
+      - mongo
+
+  redis:
+    image: redis:5.0-alpine3.9
+    ports:
+        - $REDIS_PORT:$REDIS_PORT
+
+  mongo:
+    image: mongo:4.0
+    volumes:
+      - /data/db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
