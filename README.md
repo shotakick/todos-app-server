@@ -5,5 +5,16 @@ TypeScript + Node.js + Express + MongoDBによる簡易TODOアプリケーショ
 - [todos](https://github.com/shotakick/todos)
 
 ## ざっくり開発方針
-- RESTful API
-- Docker(Linuxコンテナ)
+- API Server
+  - RESTful API
+- Storage
+  - User Data(Todos and Accounts)
+    - MongoDB
+  - Login Sessions
+    - Redis
+- Development Environment
+  - Visual Studio Code Remote Development
+    - Remote - Containers
+- Deployment
+  - Docker(Alpine Linux Base)
+  - CircleCI: GitHub to Heroku
