@@ -1,6 +1,6 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-	"name": "Node.js & Mongo DB & TypeScript",
+	"name": "Todos App Server (Dev)",
   "dockerComposeFile": [
 	// 	"../docker-compose.yml",
 		"docker-compose.yml"
