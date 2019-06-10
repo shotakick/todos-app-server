@@ -19,6 +19,7 @@
       }
     ],
     "ordered-imports": true,
-    "trailing-comma": false
+    "trailing-comma": false,
+    "import-name": false
   }
 }

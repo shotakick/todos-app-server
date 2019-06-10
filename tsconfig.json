@@ -9,9 +9,12 @@
     "outDir": "dist",
     "rootDir": "src",
     "baseUrl": ".",
-    "types" : ["node"]
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.spec.ts"
   ]
 }

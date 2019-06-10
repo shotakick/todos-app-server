@@ -3,8 +3,8 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# FROM node:8.16.0-alpine  # alpineベースはまだ未サポート
-FROM node:8.16.0-slim
+# FROM node:10.16-alpine  # alpineベースはまだ未サポート
+FROM node:10.16-slim
 
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
