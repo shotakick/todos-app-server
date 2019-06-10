@@ -1,5 +1,7 @@
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import routerV1 from './routes/v1';
 
 const FRONT_ORIGIN = process.env.FRONT_ORIGIN || 'localhost';
 
@@ -12,9 +14,13 @@ app.use(
   }),
 );
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use('/api/v1', routerV1);
+
 app.get('/', async (req, res) => {
-  const data = 'Hello world.';
-  return res.send(data);
+  return res.send('Hello world.');
 });
 
 export default app;
