@@ -15,6 +15,8 @@ TypeScript + Node.js + Express + MongoDBによる簡易TODOアプリケーショ
 - Development Environment
   - Visual Studio Code Remote Development
     - Remote - Containers
+- Testing
+  - Jest
 - Deployment
   - Docker(Alpine Linux Base)
   - CircleCI: GitHub to Heroku
