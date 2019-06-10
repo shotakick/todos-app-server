@@ -23,7 +23,9 @@
     "ms-vscode.vscode-typescript-tslint-plugin",
     "esbenp.prettier-vscode",
     "peterjausovec.vscode-docker",
-    "orta.vscode-jest"
+    "orta.vscode-jest",
+    "gruntfuggly.todo-tree",
+    "humao.rest-client"
 	],
 	"settings": {
 		"remote.extensionKind": {

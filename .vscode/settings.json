@@ -1,5 +1,17 @@
 {
   "editor.codeActionsOnSave": {
-      "source.fixAll.tslint": true
-  }
+    "source.fixAll.tslint": true,
+  },
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "version": "v1",
+      "port": "3000"
+    },
+    "local": {
+      "host": "localhost",
+    },
+    "production": {
+      "host": "example.com",
+    },
+  },
 }
