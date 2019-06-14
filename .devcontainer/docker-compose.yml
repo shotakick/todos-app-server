@@ -3,16 +3,16 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-version: '3'
+version: '3.4'
 services:
   api-server:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
+      target: build_env
+    image: api-server-dev
     environment:
       NODE_ENV: development
-      MONGO_DB_HOST: mongo
-      REDIS_HOST: redis
     ports:
       - $API_PORT:$API_PORT
     volumes:
@@ -26,8 +26,6 @@ services:
     depends_on:
       - mongo
       - redis
-    links:
-      - mongo
 
   redis:
     image: redis:5.0-alpine3.9
@@ -40,5 +38,5 @@ services:
       - /data/db
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME:
+      MONGO_INITDB_ROOT_PASSWORD:

@@ -3,8 +3,11 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# FROM node:10.16-alpine  # alpineベースはまだ未サポート
-FROM node:10.16-slim
+# FROM node:10.16-alpine as base # 現状、VSCodeのremote developmentでalpineベース未サポートなので
+FROM node:10.16-slim as base
+
+# Building environment
+FROM base as build_env
 
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
@@ -26,11 +29,17 @@ RUN rm -rf /opt/yarn-* \
     && apt-get -y install --no-install-recommends yarn
 
 # Install Docker CE CLI
-RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
-    && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
-    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
-    && apt-get update \
-    && apt-get install -y docker-ce-cli
+RUN apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common \
+    lsb-release \
+  && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
+  && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
+  && apt-get update \
+  && apt-get install -y docker-ce-cli
 
 # Install tslint and typescript
 # RUN npm install -g tslint prettier typescript
@@ -43,3 +52,9 @@ ENV DEBIAN_FRONTEND=dialog
 
 # Set the default shell to bash instead of sh
 ENV SHELL /bin/bash
+
+# Test and build
+FROM build_env as build
+
+# Running environment
+FROM base as run_env
