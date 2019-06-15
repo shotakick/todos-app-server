@@ -19,8 +19,12 @@ app.use(bodyParser.json());
 
 app.use('/api/v1', routerV1);
 
-app.get('/', async (req, res) => {
-  return res.send('Hello world.');
+app.get('/', (req, res) => {
+  res.send('Hello world.');
+});
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'Not Found API.' });
 });
 
 export default app;
