@@ -4,13 +4,51 @@
   // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
+   {
+      "type": "node",
+      "name": "vscode-jest-tests",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      "args": [
+        "--runInBand"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      // "preLaunchTask": "build",
-      "program": "${workspaceFolder}/src/${fileBasenameNoExtension}.ts",
-      // "program": "${workspaceFolder}/src/app.ts",
+      "name": "Launch Server",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/server.ts",
+      "smartStep": true,
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Server via nodemon (not work)",
+      "program": "${workspaceFolder}/src/server.ts",
+      "runtimeExecutable": "nodemon",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "smartStep": true,
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach Node via nodemon (not work)",
+      "processId": "${command:PickProcess}",
+      "restart": true,
+      "protocol": "inspector",
       "smartStep": true,
       "outFiles": [
         "${workspaceFolder}/dist/**/*.js"

@@ -34,9 +34,21 @@ services:
 
   mongo:
     image: mongo:4.0
+    ports:
+     - $MONGO_DB_PORT:$MONGO_DB_PORT
     volumes:
-      - /data/db
+      - ./db:/data/db
+      - ./configdb:/data/configdb
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME:
       MONGO_INITDB_ROOT_PASSWORD:
+
+  mongo-express:
+    image: mongo-express
+    ports:
+     - 8081:8081
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: $MONGO_INITDB_ROOT_USERNAME
+      ME_CONFIG_MONGODB_ADMINPASSWORD: $MONGO_INITDB_ROOT_PASSWORD

@@ -12,7 +12,8 @@
     "build:watch": "tsc --watch",
     "test": "jest",
     "start": "node dist/server.js",
-    "start:watch": "nodemon --inspect-brk",
+    "start:watch": "nodemon",
+    "debug:watch": "nodemon --inspect-brk",
     "lint": "tslint --exclude **/*.d.ts --project . 'src/**/*.ts'",
     "lint:fix": "tslint --exclude **/*.d.ts --project . --fix 'src/**/*.ts'",
     "postinstall": "npm run build"
